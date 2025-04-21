@@ -194,6 +194,18 @@ main() {
   
   echo "$register_response" | jq .
   
+  # Wait for email confirmation
+  print_header "Waiting for email confirmation"
+  echo "Waiting for 60 seconds to allow for email confirmation..."
+  echo "(You can press Ctrl+C to skip waiting if you've already confirmed the email)"
+  
+  # Start a countdown timer
+  for i in {60..1}; do
+    echo -ne "$i seconds remaining...\r"
+    sleep 1
+  done
+  echo -e "\nContinuing with login..."
+  
   # Login with the registered user
   login "$register_response"
   
